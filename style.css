@@ -5,8 +5,8 @@
   --border:    #e2e1dc;
   --border-2:  #d3d2cb;
   --text-primary:   #0b0b0b;
-  --text-secondary: #52514e;
-  --text-muted:     #7a7972;
+  --text-secondary: #3f3e3b;
+  --text-muted:     #6b6a64;
   --track:     #eceae5;
   --series-1:  #2a78d6;
   --series-2:  #eb6834;
@@ -22,8 +22,8 @@
     --border:    #2f2f2c;
     --border-2:  #3d3d39;
     --text-primary:   #ffffff;
-    --text-secondary: #c3c2b7;
-    --text-muted:     #8f8e85;
+    --text-secondary: #d6d5cb;
+    --text-muted:     #a3a299;
     --track:     #262624;
     --series-1:  #3987e5;
     --series-2:  #d95926;
@@ -39,8 +39,8 @@
   --border:    #2f2f2c;
   --border-2:  #3d3d39;
   --text-primary:   #ffffff;
-  --text-secondary: #c3c2b7;
-  --text-muted:     #8f8e85;
+  --text-secondary: #d6d5cb;
+  --text-muted:     #a3a299;
   --track:     #262624;
   --series-1:  #3987e5;
   --series-2:  #d95926;
@@ -114,18 +114,57 @@ input[type=search] { min-width: 200px; }
 .card h2 { font-size: 14px; margin: 0; }
 .card .cap { color: var(--text-secondary); font-size: 12px; margin: 2px 0 12px; }
 
-svg { display: block; overflow: visible; }
-.lbl { fill: var(--text-primary); font-size: 12px; }
-.lbl-n { fill: var(--text-muted); font-size: 11px; }
-.val { fill: var(--text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
-.tick { fill: var(--text-secondary); font-size: 10px; font-variant-numeric: tabular-nums; }
-.track { fill: var(--track); }
-.grid-line, .grid { stroke: var(--border); stroke-width: 1; }
-.axis { stroke: var(--border-2); stroke-width: 1; }
 .mark { cursor: default; outline: none; }
-.mark .bar { transition: opacity .12s ease; }
-.mark:hover .bar, .mark:focus-visible .bar { opacity: .78; }
-.mark:focus-visible .bar { stroke: var(--text-primary); stroke-width: 2; paint-order: stroke; }
+.mark:hover .hb-bar, .mark:hover .vb-bar, .vs-seg:hover { filter: brightness(1.12); }
+.mark:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; border-radius: 4px; }
+
+/* 横棒 */
+.hb { display: flex; flex-direction: column; gap: 9px; }
+.hb-row { display: grid; grid-template-columns: var(--lbl-w, 200px) 1fr auto; gap: 12px; align-items: center; }
+.hb-lbl {
+  text-align: right; color: var(--text-primary); font-size: 13px; line-height: 1.35;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hb-n { color: var(--text-muted); }
+.hb-track { position: relative; height: 24px; background: var(--track); border-radius: 4px; }
+.hb-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; display: block; }
+.hb-val {
+  color: var(--text-secondary); font-size: 12.5px; font-variant-numeric: tabular-nums;
+  white-space: nowrap; min-width: 64px;
+}
+
+/* 縦棒 */
+.vb { padding: 6px 0 0 52px; position: relative; }
+.vb-plot { position: relative; height: 200px; }
+.vb-scale { position: absolute; inset: 0; }
+.vb-line { position: absolute; left: 0; right: 0; border-top: 1px solid var(--border); }
+.vb-line span {
+  position: absolute; right: calc(100% + 8px); top: -0.7em;
+  color: var(--text-secondary); font-size: 11.5px; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.vb-cols { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 3px; }
+.vb-col { flex: 1 1 0; min-width: 0; height: 100%; display: flex; align-items: flex-end; }
+.vb-bar { display: block; width: 100%; border-radius: 3px 3px 0 0; }
+.vb-x { display: flex; gap: 3px; margin-top: 7px; }
+.vb-x span {
+  flex: 1 1 0; min-width: 0; text-align: center; white-space: nowrap;
+  color: var(--text-secondary); font-size: 11.5px; font-variant-numeric: tabular-nums;
+}
+
+/* 積み上げ */
+.vs { padding-top: 24px; }
+.vs .vb-plot { height: 230px; }
+.vs-cols { justify-content: flex-start; gap: 28px; padding-left: 6px; }
+.vs-col { flex: 1 1 0; max-width: 118px; height: 100%; display: flex; align-items: flex-end; }
+.vs-stack { position: relative; width: 100%; display: flex; flex-direction: column-reverse; }
+.vs-seg { display: block; width: 100%; border-radius: 3px; margin-top: 2px; outline: none; }
+.vs-seg:first-child { border-radius: 3px 3px 0 0; }
+.vs-total {
+  position: absolute; bottom: calc(100% + 5px); left: 0; right: 0; text-align: center;
+  color: var(--text-secondary); font-size: 12px; font-variant-numeric: tabular-nums;
+}
+.vs-x { gap: 28px; padding-left: 6px; }
+.vs-x span { flex: 1 1 0; max-width: 118px; }
 
 .tip {
   position: fixed; z-index: 50; max-width: 340px; pointer-events: none;
@@ -218,29 +257,16 @@ body[data-view="week"] .v-week { display: block; }
   input[type=search] { min-width: 0; }
   .ctl { width: 100%; flex-wrap: wrap; }
   .tip { max-width: calc(100vw - 24px); font-size: 12.5px; }
+  .hb-row { grid-template-columns: minmax(0, 42%) 1fr auto; gap: 8px; }
+  .hb-lbl { font-size: 12.5px; }
+  .hb-track { height: 22px; }
+  .hb-val { min-width: 54px; font-size: 12px; }
+  .vb { padding-left: 42px; }
+  .vb-plot { height: 170px; }
+  .vs .vb-plot { height: 190px; }
+  .vs-cols, .vs-x { gap: 14px; }
+  .vs-col, .vs-x span { max-width: 84px; }
+  .vs-x span { font-size: 11px; }
   table { min-width: 720px; }
   td.minor { min-width: 220px; }
 }
-
-/* 合言葉の画面 */
-.gate {
-  max-width: 420px; margin: 12vh auto 0;
-  background: var(--surface-1); border: 1px solid var(--border);
-  border-radius: 14px; padding: 26px 24px 22px; box-shadow: var(--shadow);
-}
-.gate h2 { font-size: 17px; margin: 0 0 6px; }
-.gate p { color: var(--text-secondary); font-size: 13px; margin: 0 0 16px; }
-.gate input {
-  display: block; width: 100%; margin-bottom: 12px;
-  background: var(--surface-1); color: var(--text-primary);
-  border: 1px solid var(--border-2); border-radius: 8px;
-  padding: 10px 12px; font: inherit; font-size: 15px;
-}
-.gate .btn { width: 100%; padding: 10px; font-size: 14px; }
-.btn.primary { background: var(--series-1); border-color: var(--series-1); color: #fff; font-weight: 600; }
-.btn.primary:hover { opacity: .9; border-color: var(--series-1); }
-.gate-msg { color: var(--text-secondary); font-size: 12.5px; margin: 12px 0 0; min-height: 1em; }
-#stamp { color: var(--text-muted); margin-left: 8px; }
-body:not(.ready) #reload,
-body:not(.ready) #csv,
-body:not(.ready) #logout { display: none; }
