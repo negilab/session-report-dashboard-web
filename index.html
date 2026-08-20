@@ -71,8 +71,8 @@
     </div>
     <div class="kpi">
       <div class="k">密度(1分あたり)</div>
-      <div class="v"><span id="kpi-density">—</span><small>千/分</small></div>
-      <div class="s">出力 ÷ 作業時間。ここだけ選んだ数字で変わりません</div>
+      <div class="v"><span id="kpi-density">—</span><small id="kpi-density-unit">千/分</small></div>
+      <div class="s" id="kpi-density-note">出力トークン ÷ 作業時間</div>
     </div>
   </div>
 
@@ -99,9 +99,9 @@
       <div id="chart-major"></div>
     </section>
 
-    <section class="card v-session">
+    <section class="card v-session" id="card-density">
       <h2>大項目ごとの密度</h2>
-      <p class="cap">出力 ÷ 作業時間。大きいほど、短い時間に処理が集中した大項目です。ここは選んだ数字では変わりません。<span id="density-cap"></span>。</p>
+      <p class="cap"><span id="density-note">出力トークン ÷ 作業時間。大きいほど、短い時間に処理が集中した大項目です。</span><span id="density-cap"></span></p>
       <div id="chart-density"></div>
     </section>
 
@@ -145,7 +145,7 @@
             <th data-key="idx">開始時刻</th>
             <th data-key="tokens" id="th-metric">出力トークン(千)</th>
             <th data-key="minutes">時間(分)</th>
-            <th data-key="density">密度(出力/分)</th>
+            <th data-key="density" id="th-density">密度(千/分)</th>
             <th data-key="note">備考</th>
           </tr></thead>
           <tbody id="tbody"></tbody>

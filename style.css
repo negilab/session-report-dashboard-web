@@ -241,6 +241,7 @@ body[data-view="session"] .v-session,
 body[data-view="day"] .v-day,
 body[data-view="week"] .v-week { display: block; }
 .ctl[hidden] { display: none; }
+.card[hidden] { display: none !important; }
 .ctl { display: flex; align-items: center; }
 .empty { color: var(--text-muted); font-size: 13px; margin: 12px 0; }
 
