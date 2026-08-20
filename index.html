@@ -49,8 +49,9 @@
     <div class="ctl">
       <label>見る数字</label>
       <span class="seg">
-        <button data-metric="tokens" aria-pressed="true">トークン(千)</button>
+        <button data-metric="tokens" aria-pressed="true">出力(千)</button>
         <button data-metric="minutes" aria-pressed="false">作業時間(分)</button>
+        <button data-metric="読み" aria-pressed="false">キャッシュ読み(千)</button>
       </span>
     </div>
     <div class="legend" id="legend"></div>
@@ -58,7 +59,7 @@
 
   <div class="kpis">
     <div class="kpi">
-      <div class="k">トークン概算</div>
+      <div class="k">出力トークン</div>
       <div class="v"><span id="kpi-tokens">—</span><small>千</small></div>
       <div class="s" id="kpi-perstep">—</div>
     </div>
@@ -146,7 +147,8 @@
             <th data-key="major">大項目</th>
             <th data-key="title">中項目</th>
             <th data-key="idx">開始時刻</th>
-            <th data-key="tokens">トークン(千)</th>
+            <th data-key="tokens">出力(千)</th>
+            <th data-key="読み">キャッシュ読み(千)</th>
             <th data-key="minutes">時間(分)</th>
             <th data-key="density">密度(千/分)</th>
             <th data-key="note">備考</th>
