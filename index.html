@@ -91,14 +91,14 @@
 
     <section class="card wide v-all">
       <h2>記帳順に見た<span class="metric-name">トークン概算</span></h2>
-      <p class="cap">題名1件を1本にして、シートに書いた順で並べています。色はセッションです。</p>
+      <p class="cap">中項目1件を1本にして、シートに書いた順で並べています。色はセッションです。</p>
       <div id="chart-flow-all"></div>
     </section>
 
     <!-- セッションの中身 -->
     <section class="card wide v-session">
       <h2>大項目別の<span class="metric-name">トークン概算</span>(多い順)</h2>
-      <p class="cap"><span id="major-cap"></span>。「×2」は題名が2件束ねてある印です。単位は<span class="metric-unit">千</span>。</p>
+      <p class="cap"><span id="major-cap"></span>。「×2」は中項目が2件束ねてある印です。単位は<span class="metric-unit">千</span>。</p>
       <div id="chart-major"></div>
     </section>
 
@@ -110,7 +110,7 @@
 
     <section class="card v-session">
       <h2>このセッションの流れ</h2>
-      <p class="cap">題名1件を1本にして、記帳順に並べています。</p>
+      <p class="cap">中項目1件を1本にして、記帳順に並べています。</p>
       <div id="chart-flow-one"></div>
     </section>
 
@@ -136,16 +136,16 @@
         <h2>明細</h2>
         <span class="cap" id="tcount"></span>
         <div style="flex:1"></div>
-        <input type="search" id="f-q" placeholder="題名・備考を絞り込む">
+        <input type="search" id="f-q" placeholder="中項目・備考を絞り込む">
       </div>
       <p class="cap">見出しを押すと並び替わります。</p>
       <div class="tscroll">
         <table>
           <thead><tr>
             <th data-key="short">セッション</th>
-            <th data-key="idx">開始時刻</th>
             <th data-key="major">大項目</th>
-            <th data-key="title">題名</th>
+            <th data-key="title">中項目</th>
+            <th data-key="idx">開始時刻</th>
             <th data-key="tokens">トークン(千)</th>
             <th data-key="minutes">時間(分)</th>
             <th data-key="density">密度(千/分)</th>

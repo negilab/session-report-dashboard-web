@@ -53,7 +53,7 @@
       session: 見つける("セッション名", "セッション"),
       time:    見つける("開始時刻", "時刻"),
       major:   見つける("大項目"),
-      title:   見つける("題名", "中項目"),
+      title:   見つける("中項目", "題名"),
       tokens:  見つける("トークン"),
       note:    見つける("備考"),
       minutes: 見つける("作業時間", "時間")
@@ -64,9 +64,9 @@
       .filter(r => String(r[col.session]).trim() && String(r[col.major]).trim() !== "合計")
       .map(r => [
         String(r[col.session]).trim(),
-        String(r[col.time]).trim(),
         String(r[col.major]).trim(),
         String(r[col.title]).trim(),
+        String(r[col.time]).trim(),
         数(r[col.tokens]),
         String(r[col.note] || "").trim(),
         数(r[col.minutes])
